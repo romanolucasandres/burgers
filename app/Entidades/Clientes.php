@@ -37,13 +37,13 @@ class Cliente extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
-                  A.idcliente,
-                  A.nombre,
-                  A.apellido,
-                  A.telefono,
-                  A.correo,
-                  A.clave
-                FROM clientes A ORDER BY A.nombre";
+                  idcliente,
+                  nombre,
+                  apellido,
+                  telefono,
+                  correo,
+                  clave
+                FROM clientes ORDER BY nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -75,7 +75,6 @@ class Cliente extends Model
     }
     public function guardar() { /* forma correcta que propone larabel para evitar inyecciones de querys maliciosas */
             $sql = "UPDATE clientes SET
-                  idcliente=?,
                   nombre=?,
                   apellido=?,
                   telefono=?,
@@ -83,12 +82,13 @@ class Cliente extends Model
                   clave=?
                   WHERE idcliente=?";
             $affected = DB::update($sql, 
-            [$this->idcliente,
+            [
             $this->nombre,
             $this->apellido,
             $this->telefono,
             $this->correo,
-            $this->clave]);
+            $this->clave,
+            $this->idcliente,]);
 }
     
     public function eliminar()
