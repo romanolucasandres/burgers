@@ -38,7 +38,11 @@ class Cliente extends Model
     {
         $sql = "SELECT
                   A.idcliente,
-                  A.nombre
+                  A.nombre,
+                  A.apellido,
+                  A.telefono,
+                  A.correo,
+                  A.clave
                 FROM clientes A ORDER BY A.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
