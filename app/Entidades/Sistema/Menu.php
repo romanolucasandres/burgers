@@ -123,16 +123,23 @@ class Menu extends Model
         return null;
     }
 
-    public function guardar() {
+    public function guardar() { /* forma correcta que propone larabel para evitar inyecciones de querys maliciosas */
         $sql = "UPDATE sistema_menues SET
-            nombre='$this->nombre',
-            id_padre='$this->id_padre',
-            orden=$this->orden,
-            activo='$this->activo',
-            url='$this->url',
-            css='$this->css'
+            nombre=?, 
+            id_padre=?, 
+            orden=?,
+            activo=?,
+            url=?,
+            css=?
             WHERE idmenu=?";
-        $affected = DB::update($sql, [$this->idmenu]);
+        $affected = DB::update($sql, 
+        [$this->nombre, 
+        $this->id_padre, 
+        $this->orden, 
+        $this->activo, 
+        $this->url, 
+        $this->css, 
+        $this->idmenu]);
     }
 
     public function eliminar()
@@ -160,7 +167,7 @@ class Menu extends Model
             $this->url,
             $this->css,
         ]);
-        return $this->idmenu = DB::getPdo()->lastInsertId();
+        return $this->idmenu = DB::getPdo()->lastInsertId(); // accede al ultimo insertado
     }
 
     public function obtenerMenuDelGrupo($idGrupo)
