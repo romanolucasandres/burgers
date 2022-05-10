@@ -88,7 +88,7 @@ class Cliente extends Model
             $this->telefono,
             $this->correo,
             $this->clave,
-            $this->idcliente,]);
+            $this->idcliente]);
 }
     
     public function eliminar()
