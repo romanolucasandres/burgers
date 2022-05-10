@@ -96,7 +96,7 @@ class Cliente extends Model
 
     public function insertar()
     {
-      $sql = "INSERT INTO sistema_menues (
+      $sql = "INSERT INTO clientes (
             nombre,
             apellido,
             telefono,
