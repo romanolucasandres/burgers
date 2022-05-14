@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('plantilla') 
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
@@ -29,7 +29,7 @@ function fsalir(){
 @endsection
 @section('contenido')
 <?php
-if (isset($msg)) {
+if (isset($msg)) {//Mostrar mensaje
     echo '<div id = "msg"></div>';
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
@@ -43,7 +43,7 @@ if (isset($msg)) {
 ?>
         <form id="form1" method="POST">
             <div class="row">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input> 
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
