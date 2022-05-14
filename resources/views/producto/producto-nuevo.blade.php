@@ -61,7 +61,7 @@ if (isset($msg)) {
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtImagen">Imágen: *</label>
-                  <input type="file" id="txtImagen" name="txtImagen" class="form-control"  required>
+                  <input type="file" id="txtImagen" name="txtImagen" class=""  required>
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtPrecio">Precio: *</label>
