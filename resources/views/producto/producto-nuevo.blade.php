@@ -28,7 +28,7 @@
 </ol>
 <script>
 function fsalir() {
-      location.href = "/admin/producto";
+      location.href = "/admin/productos";
 }
 </script>
 @endsection
@@ -57,11 +57,11 @@ if (isset($msg)) {
             </div>   
             <div class="col-12 col-sm-6">
                   <label for="txtDescripcion">Descripción: *</label>
-                  <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
+                  <input type="textarea" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtImagen">Imágen: *</label>
-                  <input type="image" id="txtImagen" name="txtImagen" class="form-control"  required>
+                  <input type="file" id="txtImagen" name="txtImagen" class="form-control"  required>
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtPrecio">Precio: *</label>
@@ -69,13 +69,14 @@ if (isset($msg)) {
             </div>
             
             </div>
+            
       </form>
 
       <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                   <div class="modal-content">
                         <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Eliminar registro?</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">¿Eliminar registro?</h5>
                               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                               </button>

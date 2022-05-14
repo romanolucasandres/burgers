@@ -16,3 +16,4 @@ class ControladorProducto extends Controller
             return view("producto.producto-nuevo", compact('titulo'));
 }
 }
+
