@@ -87,7 +87,7 @@ class Cliente extends Model
             $this->apellido,
             $this->telefono,
             $this->correo,
-            $this->clave,
+            password_hash($this->clave,PASSWORD_DEFAULT),
             $this->idcliente]);
 }
     
@@ -112,7 +112,7 @@ class Cliente extends Model
             $this->apellido,
             $this->telefono,
             $this->correo,
-            $this->clave
+            password_hash($this->clave,PASSWORD_DEFAULT)
       ]);
       return $this->idcliente = DB::getPdo()->lastInsertId(); // accede al ultimo insertado
     }

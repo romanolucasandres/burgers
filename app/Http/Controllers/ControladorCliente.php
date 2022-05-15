@@ -61,4 +61,37 @@ public function guardar(Request $request) {
       return view('cliente.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
 
   }
+  public function cargarGrilla() {
+      $request = $_REQUEST;
+
+      $entidadUsuario = new Usuario();
+      $usuarios = $entidadUsuario->obtenerFiltrado();
+
+      $data = array();
+
+      $inicio = $request['start'];
+      $registros_por_pagina = $request['length'];
+
+      if (count($usuarios) > 0)
+          $cont=0;
+          for ($i=$inicio; $i < count($usuarios) && $cont < $registros_por_pagina; $i++) {
+              $row = array();
+              $row[] = '<a href="/admin/usuarios/' . $usuarios[$i]->usuario . '">' . $usuarios[$i]->usuario . '</a>';
+              $row[] = $usuarios[$i]->nombre;
+              $row[] = $usuarios[$i]->apellido;
+              $row[] = $usuarios[$i]->created_at != ""? date_format(date_create($usuarios[$i]->created_at), 'Y-m-d H:i') : "";
+              $row[] = $usuarios[$i]->ultimo_ingreso != "" ?date_format(date_create($usuarios[$i]->ultimo_ingreso), 'Y-m-d H:i') : "";
+              $row[] = $usuarios[$i]->activo == 1 ? "Si" : "No";
+              $cont++;
+              $data[] = $row;
+          }
+
+      $json_data = array(
+          "draw" => intval($request['draw']),
+          "recordsTotal" => count($usuarios), //cantidad total de registros sin paginar
+          "recordsFiltered" => count($usuarios),//cantidad total de registros en la paginacion
+          "data" => $data
+      );
+      return json_encode($json_data);
+  }
 }

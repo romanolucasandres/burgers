@@ -90,12 +90,27 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* --------------------------------------------- */
     Route::get('/admin/cliente/nuevo', 'ControladorCliente@nuevo');
     Route::post('/admin/cliente/nuevo', 'ControladorCliente@guardar');
+    Route::post('/admin/cliente', 'ControladorCliente@guardar');
 
     /* --------------------------------------------- */
     /* CONTROLADOR PRODUCTOS                          */
     /* --------------------------------------------- */
     Route::get('/admin/producto/nuevo', 'ControladorProducto@nuevo');
     Route::post('/admin/producto/nuevo', 'ControladorProducto@guardar');
+
+    /* --------------------------------------------- */
+    /* CONTROLADOR SUCURSALES                          */
+    /* --------------------------------------------- */
+    Route::get('/admin/sucursal/nuevo', 'ControladorSucursal@nuevo');
+    Route::post('/admin/sucursal/nuevo', 'ControladorSucursal@guardar');
+    Route::post('/admin/sucursal', 'ControladorSucursal@guardar');
+
+    /* --------------------------------------------- */
+    /* CONTROLADOR POSTULACIONES                         */
+    /* --------------------------------------------- */
+    Route::get('/admin/sucursal/nuevo', 'ControladorSucursal@nuevo');
+    Route::post('/admin/sucursal/nuevo', 'ControladorSucursal@guardar');
+    Route::post('/admin/sucursal', 'ControladorSucursal@guardar');
 });
 
 
