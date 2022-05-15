@@ -65,7 +65,6 @@ if (isset($msg)) {
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtMapa">Mapa: </label>
-                  <input type="text" id="txtMapa" name="txtMapa" class="form-control"  required>
             </div>
             
             </div>
