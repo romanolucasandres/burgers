@@ -90,27 +90,33 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* --------------------------------------------- */
     Route::get('/admin/cliente/nuevo', 'ControladorCliente@nuevo');
     Route::post('/admin/cliente/nuevo', 'ControladorCliente@guardar');
-    Route::post('/admin/cliente', 'ControladorCliente@guardar');
+    Route::post('/admin/clientes', 'ControladorCliente@index');
+
 
     /* --------------------------------------------- */
     /* CONTROLADOR PRODUCTOS                          */
     /* --------------------------------------------- */
     Route::get('/admin/producto/nuevo', 'ControladorProducto@nuevo');
     Route::post('/admin/producto/nuevo', 'ControladorProducto@guardar');
+    Route::get('/admin/productos', 'ControladorProducto@index');
+    Route::get('/admin/productos/cargarGrilla', 'ControladorProducto@cargarGrilla')->name('producto.cargarGrilla');
+    Route::get('/admin/producto/eliminar', 'ControladorProducto@eliminar');
+    Route::get('/admin/producto/{id}', 'ControladorProducto@editar');
+    Route::post('/admin/productos/{id}', 'ControladorProducto@guardar');
+
 
     /* --------------------------------------------- */
     /* CONTROLADOR SUCURSALES                          */
     /* --------------------------------------------- */
     Route::get('/admin/sucursal/nuevo', 'ControladorSucursal@nuevo');
     Route::post('/admin/sucursal/nuevo', 'ControladorSucursal@guardar');
-    Route::post('/admin/sucursal', 'ControladorSucursal@guardar');
+    Route::post('/admin/sucursales', 'ControladorSucursalo@index');
 
     /* --------------------------------------------- */
     /* CONTROLADOR POSTULACIONES                         */
     /* --------------------------------------------- */
-    Route::get('/admin/sucursal/nuevo', 'ControladorSucursal@nuevo');
-    Route::post('/admin/sucursal/nuevo', 'ControladorSucursal@guardar');
-    Route::post('/admin/sucursal', 'ControladorSucursal@guardar');
+    Route::post('/admin/postulacion/nuevo', 'ControladorSucursal@guardar');
+    Route::post('/admin/postulaciones', 'ControladorPostulaciones@guardar');
 });
 
 
