@@ -44,7 +44,7 @@ class Producto extends Model
         $sql = "SELECT DISTINCT
                     A.idproducto,
                     A.nombre,
-                    a.descripcion,
+                    A.descripcion,
                     A.imagen,
                     A.precio
                     FROM productos A

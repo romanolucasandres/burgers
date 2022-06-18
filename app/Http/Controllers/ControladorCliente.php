@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Cliente; //include_once "app/Entidades/Sistema/cliente.php";
 use App\Entidades\Sistema\Patente;
+use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
 
 require app_path() . '/start/constants.php';
@@ -11,8 +12,8 @@ require app_path() . '/start/constants.php';
 class ControladorCliente extends Controller
 {
       public function index(){
-      $titulo = "Menú";
-      if (cliente::autenticado() == true) {
+      $titulo = "Cliente";
+      if (Usuario::autenticado() == true) {
             if (!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
@@ -78,31 +79,31 @@ class ControladorCliente extends Controller
       $request = $_REQUEST;
 
       $entidadCliente = new Cliente();
-      $clientes = $entidadCliente->obtenerFiltrado();
+      $aclientes = $entidadCliente->obtenerFiltrado();
 
       $data = array();
 
       $inicio = $request['start'];
       $registros_por_pagina = $request['length'];
 
-      if (count($clientes) > 0)
+      if (count($aclientes) > 0)
           $cont=0;
-          for ($i=$inicio; $i < count($clientes) && $cont < $registros_por_pagina; $i++) {
+          for ($i=$inicio; $i < count($aclientes) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a href="/admin/clientes/' . $clientes[$i]->cliente . '">' . $clientes[$i]->cliente . '</a>';
-              $row[] = $clientes[$i]->nombre;
-              $row[] = $clientes[$i]->apellido;
-              $row[] = $clientes[$i]->created_at != ""? date_format(date_create($clientes[$i]->created_at), 'Y-m-d H:i') : "";
-              $row[] = $clientes[$i]->ultimo_ingreso != "" ?date_format(date_create($clientes[$i]->ultimo_ingreso), 'Y-m-d H:i') : "";
-              $row[] = $clientes[$i]->activo == 1 ? "Si" : "No";
+              $row[] = '<a href="/admin/clientes/' . $aclientes[$i]->idcliente . '">' . $aclientes[$i]->nombre . '</a>';
+              $row[] = $aclientes[$i]->nombre;
+              $row[] = $aclientes[$i]->apellido;
+              $row[] = $aclientes[$i]->telefono;
+              $row[] = $aclientes[$i]->correo;
+
               $cont++;
               $data[] = $row;
           }
 
       $json_data = array(
           "draw" => intval($request['draw']),
-          "recordsTotal" => count($clientes), //cantidad total de registros sin paginar
-          "recordsFiltered" => count($clientes),//cantidad total de registros en la paginacion
+          "recordsTotal" => count($aclientes), //cantidad total de registros sin paginar
+          "recordsFiltered" => count($aclientes),//cantidad total de registros en la paginacion
           "data" => $data
       );
       return json_encode($json_data);

@@ -69,6 +69,39 @@ class Sucursal extends Model
       return null;
 
     }
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'A.nombre',
+            1 => 'A.domicilio',
+            2 => 'A.telefono',
+            3 => 'A.link_mapa',
+        );
+        $sql = "SELECT DISTINCT
+                    A.idsucursal,
+                    A.nombre,
+                    A.domicilio,
+                    A.telefono,
+                    A.link_mapa
+                    FROM sucursales A
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR A.domicilio LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR A.telefono LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR A.link_mapa LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+
     public function guardar() { /* forma correcta que propone larabel para evitar inyecciones de querys maliciosas */
             $sql = "UPDATE sucursales SET
                   nombre=?,

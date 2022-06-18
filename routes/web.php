@@ -90,7 +90,11 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* --------------------------------------------- */
     Route::get('/admin/cliente/nuevo', 'ControladorCliente@nuevo');
     Route::post('/admin/cliente/nuevo', 'ControladorCliente@guardar');
-    Route::post('/admin/clientes', 'ControladorCliente@index');
+    Route::get('/admin/clientes', 'ControladorCliente@index');
+    Route::get('/admin/clientes/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
+    Route::get('/admin/cliente/eliminar', 'ControladorCliente@eliminar');
+    Route::get('/admin/cliente/{id}', 'ControladorCliente@editar');
+    Route::post('/admin/cliente/{id}', 'ControladorCliente@guardar');
 
 
     /* --------------------------------------------- */
@@ -102,7 +106,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/productos/cargarGrilla', 'ControladorProducto@cargarGrilla')->name('producto.cargarGrilla');
     Route::get('/admin/producto/eliminar', 'ControladorProducto@eliminar');
     Route::get('/admin/producto/{id}', 'ControladorProducto@editar');
-    Route::post('/admin/productos/{id}', 'ControladorProducto@guardar');
+    Route::post('/admin/producto/{id}', 'ControladorProducto@guardar');
 
 
     /* --------------------------------------------- */
@@ -110,13 +114,17 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* --------------------------------------------- */
     Route::get('/admin/sucursal/nuevo', 'ControladorSucursal@nuevo');
     Route::post('/admin/sucursal/nuevo', 'ControladorSucursal@guardar');
-    Route::post('/admin/sucursales', 'ControladorSucursalo@index');
+    Route::get('/admin/sucursales', 'ControladorSucursal@index');
+    Route::get('/admin/sucursales/cargarGrilla', 'ControladorSucursal@cargarGrilla')->name('sucursal.cargarGrilla');
+    Route::get('/admin/sucursal/eliminar', 'ControladorSucursal@eliminar');
+    Route::get('/admin/sucursal/{id}', 'ControladorSucursal@editar');
+    Route::post('/admin/sucursal/{id}', 'ControladorSucursal@guardar');
 
     /* --------------------------------------------- */
     /* CONTROLADOR POSTULACIONES                         */
     /* --------------------------------------------- */
     Route::post('/admin/postulacion/nuevo', 'ControladorSucursal@guardar');
-    Route::post('/admin/postulaciones', 'ControladorPostulaciones@guardar');
+    Route::get('/admin/postulaciones', 'ControladorPostulaciones@guardar');
 });
 
 
