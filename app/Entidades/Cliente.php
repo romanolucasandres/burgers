@@ -17,6 +17,7 @@ class Cliente extends Model
       'telefono',
       'correo',
       'clave',
+    
       
     ];
 
@@ -31,6 +32,7 @@ class Cliente extends Model
       $this->telefono = $request->input('txtTelefono');
       $this->correo = $request->input('txtCorreo');
       $this->clave = $request->input('txtClave');
+     
 
     }
 
@@ -57,6 +59,7 @@ class Cliente extends Model
                    'telefono',
                    'correo',
                    'clave',
+                  
                     FROM clientes WHERE idcliente = $idcliente";
             $lstRetorno = DB::select($sql);
 
@@ -67,7 +70,7 @@ class Cliente extends Model
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
             $this->clave = $lstRetorno[0]->clave;
-      
+
             return $this;
       }
       return null;
@@ -79,7 +82,8 @@ class Cliente extends Model
                   apellido=?,
                   telefono=?,
                   correo=?,
-                  clave=?
+                  clave=?,
+                 
                   WHERE idcliente=?";
             $affected = DB::update($sql, 
             [
@@ -106,7 +110,7 @@ class Cliente extends Model
             telefono,
             correo,
             clave
-        ) VALUES (?, ?, ?, ?, ?);";
+        ) VALUES (?, ?, ?, ?,?);";
       $result = DB::insert($sql, [
             $this->nombre,
             $this->apellido,

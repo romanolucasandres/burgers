@@ -90,11 +90,11 @@ class ControladorCliente extends Controller
           $cont=0;
           for ($i=$inicio; $i < count($aclientes) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a href="/admin/clientes/' . $aclientes[$i]->idcliente . '">' . $aclientes[$i]->nombre . '</a>';
-              $row[] = $aclientes[$i]->nombre;
+              $row[] = '<a href="/admin/clientes/' . $aclientes[$i]->idcliente . '">' . $aclientes[$i]->nombre . '</a>';              
               $row[] = $aclientes[$i]->apellido;
               $row[] = $aclientes[$i]->telefono;
               $row[] = $aclientes[$i]->correo;
+           
 
               $cont++;
               $data[] = $row;
