@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0";?>
+    globalId = '<?php echo isset($cliente->idcliente) && $cliente->idcliente > 0 ? $cliente->idcliente : 0; ?>';
+    <?php $globalId = isset($cliente->idcliente) ? $cliente->idcliente : "0";?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -53,23 +53,23 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="col-12 col-sm-6">
                   <label for="txtNombre">Nombre: *</label>
-                  <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                  <input type="text" id="txtNombre" name="txtNombre" class="form-control" required  value="{{$cliente->nombre}}">
             </div>   
             <div class="col-12 col-sm-6">
                   <label for="txtApellido">Apellido: *</label>
-                  <input type="text" id="txtApellido" name="txtApellido" class="form-control"  required>
+                  <input type="text" id="txtApellido" name="txtApellido" class="form-control" required value="{{$cliente->apellido}}>
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtTelefono">Teléfono: *</label>
-                  <input type="tel" id="txtTelefono" name="txtTelefono" class="form-control"  required>
+                  <input type="tel" id="txtTelefono" name="txtTelefono" class="form-control" required value="{{$cliente->telefono}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtCorreo">Email: *</label>
-                  <input type="email" id="txtCorreo" name="txtCorreo" class="form-control"  required>
+                  <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" required value="{{$cliente->email}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtClave">Clave: *</label>
-                  <input type="text" id="txtClave" name="txtClave" class="form-control"  required>
+                  <input type="text" id="txtClave" name="txtClave" class="form-control" required value="{{$cliente->clave}}">
             </div>
             </div>
       </form>

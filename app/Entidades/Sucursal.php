@@ -52,7 +52,8 @@ class Sucursal extends Model
                    'nombre',
                    'domicilio',
                    'telefono',
-                   'link_mapa'
+                   'link_mapa',
+                   
                     FROM sucursales WHERE idsucursal = $idsucursal";
             $lstRetorno = DB::select($sql);
 

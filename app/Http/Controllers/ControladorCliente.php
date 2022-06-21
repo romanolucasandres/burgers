@@ -90,7 +90,8 @@ class ControladorCliente extends Controller
           $cont=0;
           for ($i=$inicio; $i < count($aclientes) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a href="/admin/clientes/' . $aclientes[$i]->idcliente . '">' . $aclientes[$i]->nombre . '</a>';              
+              $row[] = '<a class="btn btn-secondary" href="/admin/clientes/' . $aclientes[$i]->idcliente . '"> <i class="fa-solid fa-pencil"></i></a>';              
+              $row[] = $aclientes[$i]->nombre;
               $row[] = $aclientes[$i]->apellido;
               $row[] = $aclientes[$i]->telefono;
               $row[] = $aclientes[$i]->correo;
@@ -108,4 +109,22 @@ class ControladorCliente extends Controller
       );
       return json_encode($json_data);
   }
+  public function editar($id)
+    {
+        $titulo = "Modificar Cliente";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                $codigo = "MENUMODIFICACION";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $cliente = new Cliente();
+                $cliente->obtenerPorId($id);
+
+                return view('cliente.cliente-nuevo', compact('cliente', 'titulo'));
+            }
+        } else {
+            return redirect('admin/login');
+        }
+    }
 }

@@ -35,6 +35,47 @@ class Pedido extends Model
       $this->fecha = $request->input('txtFecha');
 
     }
+    public function obtenerFiltrado()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'A.nombre',
+            1 => 'B.nombre',
+            2 => 'C.nombre',
+            3 => 'D.estado',
+            4 => 'A.total',
+            5 => 'A.comentario',
+            6 => 'A.fecha',
+        );
+        $sql = "SELECT DISTINCT
+                    A.idpedido,
+                    B.nombre as cliente,
+                    C.nombre as sucursal,
+                    D.estado as estado,
+                    A.total,
+                    A.comentario,
+                    A.fecha
+                    FROM pedidos A
+                    LEFT JOIN pedidos B ON A.idcliente = B.idpedido
+                    LEFT JOIN pedidos C ON A.idsucursal = C.idpedido
+                    LEFT JOIN pedidos D ON A.idestado = D.idpedido
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR B.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR A.url LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+
+  
 
     public function obtenerTodos()
     {

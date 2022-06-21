@@ -107,6 +107,25 @@ class ControladorProducto extends Controller
       );
       return json_encode($json_data);
       }
+
+      public function editar($id)
+    {
+        $titulo = "Modificar producto";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                $codigo = "MENUMODIFICACION";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $producto = new EntidadesProducto();
+                $producto->obtenerPorId($id);
+
+                return view('producto.producto-nuevo', compact('producto', 'titulo'));
+            }
+        } else {
+            return redirect('admin/login');
+        }
+    }
 }
 
 

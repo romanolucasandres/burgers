@@ -91,7 +91,8 @@ class ControladorSucursal extends Controller
       $cont=0;
       for ($i=$inicio; $i < count($aSucursal) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = '<a href="/admin/sucursal/' . $aSucursal[$i]->idsucursal . '">' . $aSucursal[$i]->nombre . '</a>';
+            $row[] = '<a class="btn btn-secondary" href="/admin/sucursales/' . $aSucursal[$i]->idsucursal . '"> <i class="fa-solid fa-pencil"></i></a>';              
+            $row[] = $aSucursal[$i]->nombre;
             $row[] = $aSucursal[$i]->domicilio;
             $row[] = $aSucursal[$i]->telefono;
             $row[] = $aSucursal[$i]->link_mapa;
@@ -107,6 +108,25 @@ class ControladorSucursal extends Controller
       );
       return json_encode($json_data);
       }
+
+      public function editar($id)
+    {
+        $titulo = "Modificar sucursal";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                $codigo = "MENUMODIFICACION";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $sucursal = new Sucursal();
+                $sucursal->obtenerPorId($id);
+
+                return view('sucursal.sucursal-nuevo', compact('sucursal', 'titulo'));
+            }
+        } else {
+            return redirect('admin/login');
+        }
+    }
 }
 
 

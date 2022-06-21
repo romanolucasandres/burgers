@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0";?>
+    globalId = '<?php echo isset($sucursal->idsucursal) && $sucursal->idcliente > 0 ? $sucursal->idsucursal : 0; ?>';
+    <?php $globalId = isset($sucursal->idsucursal) ? $sucursal->idsucursal : "0";?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -53,18 +53,20 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="col-12 col-sm-6">
                   <label for="txtNombre">Nombre: *</label>
-                  <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                  <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required value="{{$sucursal->nombre}}">
             </div>   
             <div class="col-12 col-sm-6">
                   <label for="txtDomicilio">Domicilio: *</label>
-                  <input type="text" id="txtDomicilio" name="txtDomicilioe" class="form-control"  required>
+                  <input type="text" id="txtDomicilio" name="txtDomicilioe" class="form-control"  required value="{{$sucursal->domicilio}}">
             </div>   
             <div class="col-12 col-sm-6">
                   <label for="txtTelefono">Teléfono: *</label>
-                  <input type="text" id="txtTelefono" name="txtTelefono" class="form-control"  required>
+                  <input type="text" id="txtTelefono" name="txtTelefono" class="form-control"  required value="{{$sucursal->telefono}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtMapa">Mapa: </label>
+                  <input type="text" id="txtMapa" name="txtTelefono" class="form-control"  required value="{{$sucursal->mapa}}">
+
             </div>
             
             </div>

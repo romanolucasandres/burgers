@@ -53,19 +53,19 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="col-12 col-sm-6">
                   <label for="txtNombre">Nombre: *</label>
-                  <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required>
+                  <input type="text" id="txtNombre" name="txtNombre" class="form-control"  required value="{{$producto->nombre}}">
             </div>   
             <div class="col-12 col-sm-6">
                   <label for="txtDescripcion">Descripción: *</label>
-                  <input type="textarea" id="txtDescripcion" name="txtDescripcion" class="form-control"  required>
+                  <input type="textarea" id="txtDescripcion" name="txtDescripcion" class="form-control"  required value="{{$producto->descripcion}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtImagen">Imágen: *</label>
-                  <input type="file" id="txtImagen" name="txtImagen" class=""  required>
+                  <input type="file" id="txtImagen" name="txtImagen" class=""  required value="{{$producto->imagen}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtPrecio">Precio: *</label>
-                  <input type="text" id="txtPrecio" name="txtPrecio" class="form-control"  required>
+                  <input type="text" id="txtPrecio" name="txtPrecio" class="form-control"  required value="{{$producto->precio}}">
             </div>
             
             </div>
