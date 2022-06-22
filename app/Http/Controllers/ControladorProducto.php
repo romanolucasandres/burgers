@@ -27,8 +27,9 @@ class ControladorProducto extends Controller
               }
             }
             public function nuevo(){
+                  $producto=new EntidadesProducto();
                   $titulo = "Nuevo producto";
-                  return view("producto.producto-nuevo", compact('titulo'));
+                  return view("producto.producto-nuevo", compact('titulo','producto'));
             }
 
        
@@ -91,7 +92,8 @@ class ControladorProducto extends Controller
       $cont=0;
       for ($i=$inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = '<a href="/admin/productos/' . $aProductos[$i]->idproducto . '">' . $aProductos[$i]->nombre . '</a>';
+            $row[] = '<a href="/admin/productos/' . $aProductos[$i]->idproducto . '"> <i class="fa-solid fa-pencil"></i></a>';
+            $row[] = $aProductos[$i]->nombre;
             $row[] = $aProductos[$i]->descripcion;
             $row[] = $aProductos[$i]->imagen;
             $row[] = $aProductos[$i]->precio;
@@ -122,6 +124,27 @@ class ControladorProducto extends Controller
 
                 return view('producto.producto-nuevo', compact('producto', 'titulo'));
             }
+        } else {
+            return redirect('admin/login');
+        }
+    }
+
+    public function eliminar(Request $request)
+    {
+        $id = $request->input('id');
+
+        if (Usuario::autenticado() == true) {
+            if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                $entidad = new EntidadesProducto();
+                $entidad->cargarDesdeRequest($request);
+                $entidad->eliminar();
+
+                $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+            } else {
+                $codigo = "ELIMINARPROFESIONAL";
+                $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
+            }
+            echo json_encode($aResultado);
         } else {
             return redirect('admin/login');
         }

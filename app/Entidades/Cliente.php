@@ -93,7 +93,7 @@ class Cliente extends Model
             $this->correo,
             password_hash($this->clave,PASSWORD_DEFAULT),
             $this->idcliente]);
-}
+    }
     
     public function eliminar()
     {

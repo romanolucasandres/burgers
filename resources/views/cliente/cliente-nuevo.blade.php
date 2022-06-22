@@ -57,7 +57,7 @@ if (isset($msg)) {
             </div>   
             <div class="col-12 col-sm-6">
                   <label for="txtApellido">Apellido: *</label>
-                  <input type="text" id="txtApellido" name="txtApellido" class="form-control" required value="{{$cliente->apellido}}>
+                  <input type="text" id="txtApellido" name="txtApellido" class="form-control" required value="{{$cliente->apellido}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtTelefono">Teléfono: *</label>
