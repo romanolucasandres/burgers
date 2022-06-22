@@ -92,7 +92,7 @@ class ControladorProducto extends Controller
       $cont=0;
       for ($i=$inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = '<a href="/admin/productos/' . $aProductos[$i]->idproducto . '"> <i class="fa-solid fa-pencil"></i></a>';
+            $row[] = '<a class="btn btn-secondary" href="/admin/productos/' . $aProductos[$i]->idproducto . '"> <i class="fa-solid fa-pencil"></i></a>';
             $row[] = $aProductos[$i]->nombre;
             $row[] = $aProductos[$i]->descripcion;
             $row[] = $aProductos[$i]->imagen;

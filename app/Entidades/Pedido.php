@@ -39,34 +39,34 @@ class Pedido extends Model
     {
         $request = $_REQUEST;
         $columns = array(
-            0 => 'A.nombre',
-            1 => 'B.nombre',
+            0 => 'A.idpedido',
+            1 => 'B.apellido',
             2 => 'C.nombre',
-            3 => 'D.estado',
+            3 => 'D.nombre',
             4 => 'A.total',
             5 => 'A.comentario',
             6 => 'A.fecha',
         );
         $sql = "SELECT DISTINCT
                     A.idpedido,
-                    B.nombre as cliente,
+                    B.apellido as cliente,
                     C.nombre as sucursal,
-                    D.estado as estado,
+                    D.nombre as estado,
                     A.total,
                     A.comentario,
                     A.fecha
                     FROM pedidos A
-                    LEFT JOIN pedidos B ON A.idcliente = B.idpedido
-                    LEFT JOIN pedidos C ON A.idsucursal = C.idpedido
-                    LEFT JOIN pedidos D ON A.idestado = D.idpedido
-                WHERE 1=1
+                    INNER JOIN clientes B ON A.fk_idcliente = B.idcliente
+                    INNER JOIN sucursales C ON A.fk_idsucursal = C.idsucursal
+                    INNER JOIN estado D ON A.fk_estado = D.idestado
+                
                 ";
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
-            $sql .= " AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR B.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR A.url LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " AND ( B.apellido LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR D.nombre LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 

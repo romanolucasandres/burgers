@@ -12,7 +12,7 @@ require app_path() . '/start/constants.php';
 class ControladorPedido extends Controller
 {
       public function index(){
-      $titulo = "Pedido";
+      $titulo = "Pedidos";
       if (Usuario::autenticado() == true) {
             if (!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
@@ -41,13 +41,13 @@ class ControladorPedido extends Controller
 
       for ($i=$inicio; $i < count($apedidos) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a href="/admin/pedidos/' . $apedidos[$i]->idpedido . '">' . $apedidos[$i]->idcliente . '</a>';              
-              $row[] = $apedidos[$i]->idsucursal;
-              $row[] = $apedidos[$i]->idestado;
+              $row[] = '<a class="btn btn-secondary" href="/admin/pedidos/' . $apedidos[$i]->idpedido . '"> <i class="fa-solid fa-pencil"></i></a>';              
+              $row[] = $apedidos[$i]->cliente;
+              $row[] = $apedidos[$i]->sucursal;
+              $row[] = $apedidos[$i]->estado;
               $row[] = $apedidos[$i]->total;
               $row[] = $apedidos[$i]->comentario;
-              $row[] = $apedidos[$i]->fecha;
-
+              $row[] = date_format(date_create( $apedidos[$i]->fecha), "d/m/Y H:i");
               $cont++;
               $data[] = $row;
           }
