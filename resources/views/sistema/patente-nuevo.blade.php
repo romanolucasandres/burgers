@@ -64,15 +64,12 @@ if (isset($msg)) {
                 <label>Submódulo: *</label>
                 <input type="text" maxlength="50" id="txtSubmodulo" name="txtSubmodulo" class="form-control" value="{{ $patente->submodulo }}" required>
             </div>
-            <div class="form-group col-lg-6">
-                <label>Nombre: *</label>
-                <input type="text" maxlength="50" id="txtNombre" name="txtNombre" class="form-control" value="{{ $patente->nombre }}" required>
-            </div>
+
             <div class="form-group col-lg-6">
                 <label>Log Operación: *</label>
                 <select id="txtOperacion" name="txtOperacion" class="form-control">
                     <option value="1" selected>Sí</option>
-                    <option value="0" selected>No</option>
+                    <option value="0">No</option>
                 </select>
             </div>
             <div class="form-group col-lg-6">

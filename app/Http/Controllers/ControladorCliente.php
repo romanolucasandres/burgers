@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entidades\Cliente; //include_once "app/Entidades/Sistema/cliente.php";
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Pedido;
 use Illuminate\Http\Request;
 
 require app_path() . '/start/constants.php';
@@ -14,8 +15,8 @@ class ControladorCliente extends Controller
       public function index(){
       $titulo = "Cliente";
       if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if (!Patente::autorizarOperacion("CLIENTECONSULTA")) {
+                $codigo = "CLIENTECONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -25,11 +26,21 @@ class ControladorCliente extends Controller
             return redirect('admin/login');
         }
       }
-      public function nuevo(){
-
-            $cliente=new Cliente();
-            $titulo = "Nuevo cliente";
-            return view("cliente.cliente-nuevo", compact('titulo','cliente'));
+      public function nuevo()
+      {
+          $titulo = "Nuevo cliente";
+          if (Usuario::autenticado() == true) {
+              if (!Patente::autorizarOperacion("CLIENTEALTA")) {
+                  $codigo = "CLIENTEALTA";
+                  $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                  return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+              } else {
+                  $cliente = new Cliente();
+                  return view('cliente.cliente-nuevo', compact('cliente'));
+              }
+          } else {
+              return redirect('admin/login');
+          }
       }
 
 
@@ -92,7 +103,7 @@ class ControladorCliente extends Controller
           $cont=0;
           for ($i=$inicio; $i < count($aclientes) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a class="btn btn-secondary" href="/admin/clientes/' . $aclientes[$i]->idcliente . '"><i class="fa-solid fa-pencil"></i> </a>';              
+              $row[] = '<a class="btn btn-secondary" href="/admin/clientes' . $aclientes[$i]->idcliente . '"><i class="fa-solid fa-pencil"></i> </a>';              
               $row[] = $aclientes[$i]->nombre;
               $row[] = $aclientes[$i]->apellido;
               $row[] = $aclientes[$i]->telefono;
@@ -115,8 +126,8 @@ class ControladorCliente extends Controller
     {
         $titulo = "Modificar Cliente";
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
-                $codigo = "MENUMODIFICACION";
+            if (!Patente::autorizarOperacion("CLIENTEMODIFICACION")) {
+                $codigo = "CLIENTEMODIFICACION";
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -135,7 +146,7 @@ class ControladorCliente extends Controller
         $id = $request->input('id');
 
         if (Usuario::autenticado() == true) {
-            if (Patente::autorizarOperacion("MENUELIMINAR")) {
+            if (Patente::autorizarOperacion("CLIENTEELIMINAR")) {
                 $entidad = new Cliente();
                 $entidad->cargarDesdeRequest($request);
                 $entidad->eliminar();
