@@ -59,7 +59,7 @@ class Pedido extends Model
                     INNER JOIN clientes B ON A.fk_idcliente = B.idcliente
                     INNER JOIN sucursales C ON A.fk_idsucursal = C.idsucursal
                     INNER JOIN estado D ON A.fk_estado = D.idestado
-                
+                WHERE 1=1
                 ";
 
         //Realiza el filtrado

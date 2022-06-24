@@ -64,8 +64,8 @@ if (isset($msg)) {
                   <input type="tel" id="txtTelefono" name="txtTelefono" class="form-control" required value="{{$cliente->telefono}}">
             </div>
             <div class="col-12 col-sm-6">
-                  <label for="txtCorreo">Email: *</label>
-                  <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" required value="{{$cliente->email}}">
+                  <label for="txtCorreo">Correo: *</label>
+                  <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" required value="{{$cliente->correo}}">
             </div>
             <div class="col-12 col-sm-6">
                   <label for="txtClave">Clave: *</label>

@@ -103,7 +103,7 @@ class ControladorCliente extends Controller
           $cont=0;
           for ($i=$inicio; $i < count($aclientes) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a class="btn btn-secondary" href="/admin/clientes' . $aclientes[$i]->idcliente . '"><i class="fa-solid fa-pencil"></i> </a>';              
+              $row[] = '<a class="btn btn-secondary" href="/admin/cliente/' . $aclientes[$i]->idcliente . '"><i class="fas fa-pen"></i> </a>';              
               $row[] = $aclientes[$i]->nombre;
               $row[] = $aclientes[$i]->apellido;
               $row[] = $aclientes[$i]->telefono;
@@ -126,8 +126,8 @@ class ControladorCliente extends Controller
     {
         $titulo = "Modificar Cliente";
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("CLIENTEMODIFICACION")) {
-                $codigo = "CLIENTEMODIFICACION";
+            if (!Patente::autorizarOperacion("CLIENTEEDITAR")) {
+                $codigo = "CLIENTEEDITAR";
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -153,7 +153,7 @@ class ControladorCliente extends Controller
 
                 $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
             } else {
-                $codigo = "ELIMINARPROFESIONAL";
+                $codigo = "ELIMINARCLIENTE";
                 $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
             }
             echo json_encode($aResultado);

@@ -53,12 +53,12 @@ class Cliente extends Model
     public function obtenerPorId($idcliente)
     {
             $sql = "SELECT
-                   'idcliente',
-                   'nombre',
-                   'apellido',
-                   'telefono',
-                   'correo',
-                   'clave',
+                   idcliente,
+                   nombre,
+                   apellido,
+                   telefono,
+                   correo,
+                   clave
                   
                     FROM clientes WHERE idcliente = $idcliente";
             $lstRetorno = DB::select($sql);
