@@ -44,25 +44,19 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto">
                     <a href="/" class="nav-item nav-link active">Inicio</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="feature.html" class="nav-item nav-link">Feature</a>
-                    <a href="team.html" class="nav-item nav-link">Chef</a>
-                    <a href="menu.html" class="nav-item nav-link">Menu</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="menu.php" class="nav-item nav-link">Takeaway</a>
+                    <a href="about.html" class="nav-item nav-link">Nosotros</a>
+        
+                    <a href="team.html" class="nav-item nav-link">Menu</a>
+                    
+                    <a href="booking.html" class="nav-item nav-link">Trabajo</a>
+                    <a href="feature.php" class="nav-item nav-link">Carrito</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- Nav Bar End -->
-   @yield('contenido')
+    @yield('contenido')
 
 
     <!-- Booking Start -->
