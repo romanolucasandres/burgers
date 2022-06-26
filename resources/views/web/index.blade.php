@@ -16,7 +16,7 @@
                             Mirá nuestro menú y dejate sorprender..
                         </p>
                         <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">Ir a Menú</a>
+                            <a class="btn custom-btn" href="/menu">Ir a Menú</a>
                         </div>
                     </div>
                 </div>
