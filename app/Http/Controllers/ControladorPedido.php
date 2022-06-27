@@ -14,8 +14,8 @@ class ControladorPedido extends Controller
       public function index(){
       $titulo = "Pedidos";
       if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if (!Patente::autorizarOperacion("PEDIDOCONSULTA")) {
+                $codigo = "PEDIDOCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -41,11 +41,11 @@ class ControladorPedido extends Controller
 
       for ($i=$inicio; $i < count($apedidos) && $cont < $registros_por_pagina; $i++) {
               $row = array();
-              $row[] = '<a class="btn btn-secondary" href="/admin/pedidos/' . $apedidos[$i]->idpedido . '"> <i class="fa-solid fa-pencil"></i></a>';              
-              $row[] = $apedidos[$i]->cliente;
-              $row[] = $apedidos[$i]->sucursal;
-              $row[] = $apedidos[$i]->estado;
-              $row[] = $apedidos[$i]->total;
+              $row[] = '<a class="btn btn-secondary" href="/admin/pedido/' . $apedidos[$i]->idpedido . '"> <i class="fa-solid fa-pencil"></i></a>';              
+              $row[] = '<a href="/admin/cliente/' .$apedidos[$i]->fk_idcliente . '">' .$apedidos[$i]->cliente . '</a>';
+              $row[] = '<a href="/admin/sucursal/' .$apedidos[$i]->fk_idsucursal . '">' .$apedidos[$i]->sucursal . '</a>';
+              $row[] = '<a href="/admin/estado/' .$apedidos[$i]->fk_idestado . '">' .$apedidos[$i]->estado . '</a>';
+              $row[] = '$' . $apedidos[$i]->total;
               $row[] = $apedidos[$i]->comentario;
               $row[] = date_format(date_create( $apedidos[$i]->fecha), "d/m/Y H:i");
               $cont++;

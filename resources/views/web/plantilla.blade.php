@@ -46,9 +46,6 @@
                     <a href="/" class="nav-item nav-link">Inicio</a>
                     <a href="/takeaway" class="nav-item nav-link">Takeaway</a>
                     <a href="/nosotros" class="nav-item nav-link">Nosotros</a>
-
-                    <a href="/menu" class="nav-item nav-link">Menú</a>
-
                     <a href="/ingresar" class="nav-item nav-link">Ingresar </a>
                     <a href="/carrito" class="nav-link btn-card"><i class="fas fa-shopping-cart"></i> 0 -
                         $0,00</a>

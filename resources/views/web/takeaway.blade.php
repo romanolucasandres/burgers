@@ -29,55 +29,24 @@
                 <div class="tab-content">
                     <div id="burgers" class="container tab-pane active">
                         <div class="row">
-                            <div class="col-lg-10 col-md-12 ">
+                        @foreach($array_productos as $producto)
+                            <div class="col-lg-12 col-md-12 ">
+                                
                                 <div class="menu-item ">
                                     <div class="menu-img">
-                                        <img src="{{ asset('web/img/menu-burger-1.jpg') }}" alt="Image">
+                                        <img src="{{ $producto->imagen }}" alt="Image">
                                     </div>
                                     <div class="menu-text product-qty">
-                                        <h3><span>Palermo</span> <strong>$1450.00 <input class="qty" type="number" min="0" max="20" value="0"> <a class="btn custom-btn" href="#">Agregar</a></strong></h3>
+                                        <h3><span>{{$producto->nombre}}</span> <strong>{{$producto->precio}} <input class="qty" type="number" min="1" max="20" value="1"> <a class="btn custom-btn" href="#">Agregar</a></strong></h3>
                                         
-                                        <p>180g de carne con queso emmental, lechuga, huevo, aros de cebolla y barbacoa.</p>
+                                        <p>{{$producto->descripcion}}</p>
                                     </div>
+                                    <div></div>
                                 </div>
-                                <div class="menu-item">
-                                    <div class="menu-img">
-                                        <img src="{{ asset('web/img/menu-burger-2.jpg') }}" alt="Image">
-                                    </div>
-                                    <div class="menu-text">
-                                        <h3><span>Recoleta</span> <strong>$1450.00 <input class="qty" type="number" min="0" max="20" value="0"> <a class="btn custom-btn" href="#">Agregar</a></strong></h3>
-                                        <p>180g de carne con queso cheddar y panceta.</p>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <div class="menu-img">
-                                        <img src="{{ asset('web/img/menu-burger-3.jpg') }}" alt="Image">
-                                    </div>
-                                    <div class="menu-text">
-                                        <h3><span>Almagro</span> <strong>$1700.00 <input class="qty" type="number" min="0" max="20" value="0"> <a class="btn custom-btn" href="#">Agregar</a></strong></h3>
-                                        <p>4x120g de carne con cheddar y panceta.</p>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <div class="menu-img">
-                                        <img src="{{ asset('web/img/menu-burger-4.jpg') }}" alt="Image">
-                                    </div>
-                                    <div class="menu-text">
-                                        <h3><span>Nuñez</span> <strong>$1450.00 <input class="qty" type="number" min="0" max="20" value="0"> <a class="btn custom-btn" href="#">Agregar</a></strong></h3>
-                                        <p>180g de carne con queso emmental, lechuga, huevo, aros de cebolla y barbacoa.</p>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <div class="menu-img">
-                                    <img src="{{ asset('web/img/menu-burger-5.jpg') }}" alt="Image">
-                                    </div>
-                                    <div class="menu-text">
-                                        <h3><span>Caballito</span> <strong>$1450.00 <input class="qty" type="number" min="0" max="20" value="0"> <a class="btn custom-btn" href="#">Agregar</a></strong></h3>
-                                        <p>2x120g de carne con cheddar, cebolla morada, lechuga, tomate y huevo</p>
-                                    </div>
-                                </div>
+                               
+                                
                             </div>
-                            
+                            @endforeach    
                         </div>
                     </div>
 

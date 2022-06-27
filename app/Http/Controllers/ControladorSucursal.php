@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Sucursal;
-//include_once "app/Entidades/Sistema/Menu.php";
+//include_once "app/Entidades/Sistema/SUCURSAL.php";
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
@@ -12,29 +12,42 @@ require app_path() . '/start/constants.php';
 
 class ControladorSucursal extends Controller
 {
-      public function index(){
-            $titulo = "Listado de sucursales";
-            if (Usuario::autenticado() == true) {
-                  if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                      $codigo = "MENUCONSULTA";
-                      $mensaje = "No tiene permisos para la operaci&oacute;n.";
-                      return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
-                  } else {
-                      return view('sucursal.sucursal-listar', compact('titulo'));
-                  }
-              } else {
-                  return redirect('admin/login');
-              }
+    public function index()
+    {
+        $titulo = "Listado de sucursales";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALCONSULTA")) {
+                $codigo = "SUCURSALCONSULTA";
+                $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view('sucursal.sucursal-listar', compact('titulo'));
             }
-            public function nuevo(){
-                  $sucursal=new Sucursal();
-                  $titulo = "Nueva sucursal";
-                  return view("sucursal.sucursal-nuevo", compact('titulo','sucursal'));
+        } else {
+            return redirect('admin/login');
+        }
+    }
+    public function nuevo()
+    {
+        $titulo = "Nuevo sucursal";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALALTA")) {
+                $codigo = "SUCURSALALTA";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $sucursal = new Sucursal();
+                return view('sucursal.sucursal-nuevo', compact('sucursal'));
             }
-            
-       
-      public function guardar(Request $request) {
-            try {
+        } else {
+            return redirect('admin/login');
+        }
+    }
+
+
+    public function guardar(Request $request)
+    {
+        try {
             //Define la entidad servicio
             $titulo = "Modificar sucursal";
             $entidad = new Sucursal();
@@ -42,80 +55,80 @@ class ControladorSucursal extends Controller
 
             //validaciones
             if ($entidad->nombre == "" || $entidad->domicilio == "") {
-                  $msg["ESTADO"] = MSG_ERROR;
-                  $msg["MSG"] = "Complete todos los datos";
+                $msg["ESTADO"] = MSG_ERROR;
+                $msg["MSG"] = "Complete todos los datos";
             } else {
-                  if ($_POST["id"] > 0) {
-                        //Es actualizacion
-                        $entidad->guardar();
+                if ($_POST["id"] > 0) {
+                    //Es actualizacion
+                    $entidad->guardar();
 
-                        $msg["ESTADO"] = MSG_SUCCESS;
-                        $msg["MSG"] = OKINSERT;
-                  } else {
-                        //Es nuevo
-                        $entidad->insertar();
+                    $msg["ESTADO"] = MSG_SUCCESS;
+                    $msg["MSG"] = OKINSERT;
+                } else {
+                    //Es nuevo
+                    $entidad->insertar();
 
-                        $msg["ESTADO"] = MSG_SUCCESS;
-                        $msg["MSG"] = OKINSERT;
-                  }
-                  
-                  $_POST["id"] = $entidad->idsucursal; 
-                  //lo lleva a
-                  return view('sucursal.sucursal-listar', compact('titulo', 'msg'));
+                    $msg["ESTADO"] = MSG_SUCCESS;
+                    $msg["MSG"] = OKINSERT;
+                }
+
+                $_POST["id"] = $entidad->idsucursal;
+                //lo lleva a
+                return view('sucursal.sucursal-listar', compact('titulo', 'msg'));
             }
-            } catch (Exception $e) {
+        } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
-            }
+        }
 
-            $id = $entidad->idsucursal;
-            $sucursal = new Sucursal();
-            $sucursal->obtenerPorId($id);
+        $id = $entidad->idsucursal;
+        $sucursal = new Sucursal();
+        $sucursal->obtenerPorId($id);
 
-         
 
-            return view('sucursal.sucursal-nuevo', compact('msg', 'sucursal', 'titulo')) . '?id=' . $sucursal->idsucursal;
 
-            }
-      public function cargarGrilla() {
-      $request = $_REQUEST;
+        return view('sucursal.sucursal-nuevo', compact('msg', 'sucursal', 'titulo')) . '?id=' . $sucursal->idsucursal;
+    }
+    public function cargarGrilla()
+    {
+        $request = $_REQUEST;
 
-      $entidadSucursal = new Sucursal();
-      $aSucursal = $entidadSucursal->obtenerFiltrado();
+        $entidadSucursal = new Sucursal();
+        $aSucursal = $entidadSucursal->obtenerFiltrado();
 
-      $data = array();
+        $data = array();
 
-      $inicio = $request['start'];
-      $registros_por_pagina = $request['length'];
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
 
-      if (count($aSucursal) > 0)
-      $cont=0;
-      for ($i=$inicio; $i < count($aSucursal) && $cont < $registros_por_pagina; $i++) {
+        if (count($aSucursal) > 0)
+            $cont = 0;
+        for ($i = $inicio; $i < count($aSucursal) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = '<a class="btn btn-secondary" href="/admin/sucursales/' . $aSucursal[$i]->idsucursal . '"> <i class="fa-solid fa-pencil"></i></a>';              
+            $row[] = '<a class="btn btn-secondary" href="/admin/sucursales/' . $aSucursal[$i]->idsucursal . '"> <i class="fa-solid fa-pencil"></i></a>';
             $row[] = $aSucursal[$i]->nombre;
             $row[] = $aSucursal[$i]->domicilio;
             $row[] = $aSucursal[$i]->telefono;
             $row[] = $aSucursal[$i]->link_mapa;
             $cont++;
             $data[] = $row;
-      }
+        }
 
-      $json_data = array(
-      "draw" => intval($request['draw']),
-      "recordsTotal" => count($aSucursal), //cantidad total de registros sin paginar
-      "recordsFiltered" => count($aSucursal),//cantidad total de registros en la paginacion
-      "data" => $data
-      );
-      return json_encode($json_data);
-      }
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aSucursal), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aSucursal), //cantidad total de registros en la paginacion
+            "data" => $data
+        );
+        return json_encode($json_data);
+    }
 
-      public function editar($id)
+    public function editar($id)
     {
         $titulo = "Modificar sucursal";
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
-                $codigo = "MENUMODIFICACION";
+            if (!Patente::autorizarOperacion("SUCURSALMODIFICACION")) {
+                $codigo = "SUCURSALMODIFICACION";
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -134,14 +147,14 @@ class ControladorSucursal extends Controller
         $id = $request->input('id');
 
         if (Usuario::autenticado() == true) {
-            if (Patente::autorizarOperacion("MENUELIMINAR")) {
+            if (Patente::autorizarOperacion("SUCURSALELIMINAR")) {
                 $entidad = new Sucursal();
                 $entidad->cargarDesdeRequest($request);
                 $entidad->eliminar();
 
                 $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
             } else {
-                $codigo = "ELIMINARPROFESIONAL";
+                $codigo = "ELIMINARSUCURSAL";
                 $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
             }
             echo json_encode($aResultado);
@@ -150,5 +163,3 @@ class ControladorSucursal extends Controller
         }
     }
 }
-
-
